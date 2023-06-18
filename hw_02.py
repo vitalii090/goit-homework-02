@@ -11,7 +11,6 @@ CATEGORIES = extensions = {
     'archives': ('.rar', '.zip', '.gz', '.tar')
 }
 
-
 CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
 LATIN_SYMBOLS = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
                  "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
@@ -21,7 +20,7 @@ for cyrillic, latin in zip(CYRILLIC_SYMBOLS, LATIN_SYMBOLS):
     TRANS[ord(cyrillic)] = latin
     TRANS[ord(cyrillic.upper())] = latin.upper()
 
-def translate(name):
+def translate(name) -> None:
     return name.translate(TRANS)
 
 
@@ -70,9 +69,12 @@ def main():
     if not path.exists():
         return f"Folder with path {path} does'nt exist"
     
-    unpack_archive(path)
     sort_folder(path)
-    delete_empty_folder(path)       
+    print("Files sorted into categories.")
+    unpack_archive(path)
+    print("Archives unpacked.")
+    delete_empty_folder(path)
+    print("Empty folders deleted.")       
     
 if __name__ == "__main__":
     print(main())
